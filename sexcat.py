@@ -20,5 +20,4 @@ async def on_message(message):
         await message.channel.send('meow meow I just want can')
         await message.channel.send(file=discord.File(random.choice(os.listdir(os.getcwd()))))
 
-client.run(os.getenv('DISCORD_TOKEN'))
-
+client.run(os.environ('DISCORD_TOKEN'))
