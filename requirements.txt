@@ -32,3 +32,4 @@ yarl==1.7.0
 colorama==0.4.4
 discord-py-interactions==4.1.0
 discord-py-slash-command==3.0.3
+orjson==3.6.7
