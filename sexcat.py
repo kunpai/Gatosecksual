@@ -3,15 +3,25 @@ import os
 import random
 import interactions
 from discord_slash import SlashCommand, SlashContext
+from discord.ext import tasks
 from dotenv import load_dotenv
 load_dotenv()
 
-client = discord.Client()
+intents = discord.Intents.default()
+intents.members = True
+client = discord.Client(intents = intents)
 slash = SlashCommand(client, sync_commands=True)
 
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+    for guild in client.guilds:
+          print(
+            f'{client.user} is connected to the following guild:\n'
+          f'{guild.name}\n'
+          )
+    global members
+    members = guild.members
     os.chdir("./sexcat")
     
 @slash.slash(name ="meow", description="Sends sexcat photo")
@@ -21,6 +31,13 @@ async def _meow (ctx = SlashContext):
 @slash.slash(name ="answer", description="Solves your life for you")
 async def _answer (ctx = SlashContext):
     await ctx.send('Can')
+
+@slash.slash(name="can_request", description="Requests a random user for can")
+async def _can_request(ctx = SlashContext):
+    user = random.choice(members)
+    await ctx.send(user.mention)
+    await ctx.send('Pwease can I have can?')
+    await ctx.send(file=discord.File("pwease.jpg"))
 
 @client.event
 async def on_message(message):
