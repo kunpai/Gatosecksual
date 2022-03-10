@@ -1,1 +1,1 @@
-worker: python3 sexcat.py
+web: python3 sexcat.py
