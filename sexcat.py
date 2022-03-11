@@ -11,6 +11,7 @@ intents = discord.Intents.default()
 intents.members = True
 client = discord.Client(intents = intents)
 slash = SlashCommand(client, sync_commands=True)
+can = {}
 
 @client.event
 async def on_ready():
@@ -22,6 +23,8 @@ async def on_ready():
           )
     global members
     members = guild.members
+    for member in guild.members:
+        can[member] = 0
     os.chdir("./sexcat")
     
 @slash.slash(name ="meow", description="Sends sexcat photo")
@@ -43,6 +46,12 @@ async def _can_request(ctx = SlashContext):
 async def on_message(message):
     if message.author == client.user:
         return
+    
+    if message.content.startswith('🥫'):
+        await message.channel.send('meow thank u for can')
+        can[message.author] += 1
+        can_status = 'you have currently given me ' + str(can[message.author]) + ' can'
+        await message.channel.send(can_status)
 
     if message.content.startswith('!'):
         await message.channel.send('meow meow I just want can')
