@@ -49,7 +49,7 @@ async def on_message(message):
     
     if message.content.startswith('🥫'):
         await message.channel.send('meow thank u for can')
-        can[message.author] += 1
+        can[message.author] += message.content.count('🥫')
         can_status = 'you have currently given me ' + str(can[message.author]) + ' can'
         await message.channel.send(can_status)
 
