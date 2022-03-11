@@ -25,6 +25,7 @@ async def on_ready():
     members = guild.members
     for member in guild.members:
         can[member] = 0
+    can_request.start()
     os.chdir("./sexcat")
     
 @slash.slash(name ="meow", description="Sends sexcat photo")
@@ -41,6 +42,14 @@ async def _can_request(ctx = SlashContext):
     await ctx.send(user.mention)
     await ctx.send('Pwease can I have can?')
     await ctx.send(file=discord.File("pwease.jpg"))
+
+@tasks.loop(hours=10)
+async def can_request():
+    channel = client.get_channel(951343927909310477)
+    user = random.choice(members)
+    await channel.send(user.mention)
+    await channel.send('Pwease can I have can?')
+    await channel.send(file=discord.File("pwease.jpg")) 
 
 @client.event
 async def on_message(message):
