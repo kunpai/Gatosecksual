@@ -43,6 +43,13 @@ async def _can_request(ctx = SlashContext):
     await ctx.send('Pwease can I have can?')
     await ctx.send(file=discord.File("pwease.jpg"))
 
+@slash.slash(name="rick_roll", description="Creates custom Rick Roll link")
+async def _rick_roll(ctx= SlashContext, *, link = None):
+    url = link
+    url = url.replace(' ', '-')
+    url = "https://gatosecksual.kunpai.space/" + url
+    await ctx.send(url)
+
 @tasks.loop(hours=10)
 async def can_request():
     channel = client.get_channel(951343927909310477)
