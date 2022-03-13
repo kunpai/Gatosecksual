@@ -1,3 +1,10 @@
+from random import randint
+import requests
+
+r=requests.get(url = "https://evilinsult.com/generate_insult.php?lang=en&type=json")
+data = r.json()
+
+
 roast = []
 roast.append('Your forehead is a bigger wasteland than Chernobyl.')
 roast.append('Shrek called me and told me to tell you he wants his face back.')
@@ -118,4 +125,8 @@ roast.append('My politeness is preventing me from completely eviscerating you.')
 roast.append('I feel for you. Unfortunately, the feeling is nausea.')
 
 def roaster(i):
-    return roast[i]
+    rand = randint(1,2)
+    if (rand == 1):
+        return data['insult']
+    else:
+        return roast[i]
