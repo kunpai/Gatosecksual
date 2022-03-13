@@ -5,6 +5,7 @@ import interactions
 from discord_slash import SlashCommand, SlashContext
 from discord.ext import tasks
 from dotenv import load_dotenv
+from roastarray import roaster
 load_dotenv()
 
 intents = discord.Intents.default()
@@ -49,6 +50,12 @@ async def _rick_roll(ctx= SlashContext, *, link = None):
     url = url.replace(' ', '-')
     url = "https://gatosecksual.kunpai.space/" + url
     await ctx.send(url)
+    
+@slash.slash(name="roast", description="Will roast a user you pick")
+async def _roast(ctx=SlashContext, *, user: discord.Member):
+    number = random.randint(0,116)
+    await ctx.send(user.mention)
+    await ctx.send(roaster(number))
 
 @tasks.loop(hours=10)
 async def can_request():
