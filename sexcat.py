@@ -67,6 +67,11 @@ async def can_request():
 
 @client.event
 async def on_message(message):
+    mention = str(client.user.id)
+    if mention in message.content:
+        embed = discord.Embed(title="Thank you meow", description = "I want can. Created by <@!346684779338399744>",)
+        await message.channel.send(embed = embed)
+    
     if message.author == client.user:
         return
     
