@@ -35,7 +35,7 @@ async def _meow (ctx = SlashContext):
 
 @slash.slash(name ="answer", description="Solves your life for you")
 async def _answer (ctx = SlashContext):
-    if ctx.author == '<@!609321469373054987>':
+    if ctx.author == '*smey#0450':
         await ctx.send('You are banned from using this command')
     else:
         await ctx.send('Can')
